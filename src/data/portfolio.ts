@@ -370,6 +370,12 @@ export const portfolio: PortfolioConfig = {
         ],
         role: 'Backend (Java / Spring Boot) & Flutter Developer',
         organization: 'Cserve Technologies',
+        image: shot('jobx24', 1, 800, 'JobX24 home page — job search with skills and location'),
+        gallery: [
+          shot('jobx24', 2, 2293, 'JobX24 full home page'),
+          { src: '/images/projects/jobx24-3.webp', alt: 'JobX24 mobile view', width: 390, height: 844 },
+        ],
+        liveUrl: 'https://www.jobx24.com/',
       },
       // ---------------------------------------------------------------------
       // Projects delivered with Bellway Infotech (source: bellwayinfotech.com)
@@ -758,14 +764,28 @@ export const portfolio: PortfolioConfig = {
       },
       {
         slug: 'xodoxhelp',
-        title: 'XodoxHelp',
+        title: 'XodoxHelp — Xodox Help Center',
         category: 'web',
         typeLabel: 'Web Application',
-        summary: 'Support and knowledge-base platform with customer support and admin management.',
+        summary:
+          'Help center for the Xodox business suite — searchable documentation, video tutorials, support plans and ticketing.',
         description:
-          'A support and knowledge-base platform providing customer support functionality alongside administrative management tools.',
-        features: ['Knowledge base', 'Customer support functionality', 'Administrative management'],
+          'The help center for the Xodox business suite (CRM, POS, HRMS and Books). Users search documentation and video tutorials by product module, follow trending guides, explore support services and plans, and submit support tickets; admins manage the content.',
+        features: [
+          'Global search across documentation and video tutorials',
+          'Knowledge base organised by module — CRM, POS, HRMS, Books',
+          'Video tours & tutorials',
+          'Trending and recommended guides',
+          'Support services, support plans & ticket submission',
+          'Administrative content management',
+        ],
         technologies: ['React', 'TypeScript', 'Laravel', 'MySQL'],
+        image: shot('xodoxhelp', 1, 800, 'Xodox Help Center home page with search and trending guides'),
+        gallery: [
+          shot('xodoxhelp', 2, 2293, 'Xodox Help Center full home page'),
+          { src: '/images/projects/xodoxhelp-3.webp', alt: 'Xodox Help Center mobile view', width: 390, height: 844 },
+        ],
+        liveUrl: 'https://demo.cservegroup.com/mic/',
       },
     ],
     additionalTitle: 'Other projects',
