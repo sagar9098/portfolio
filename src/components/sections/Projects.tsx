@@ -1,9 +1,10 @@
 import { lazy, Suspense, useCallback, useMemo, useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import { LoaderCircle } from 'lucide-react';
+import { ChevronDown, ChevronUp, LoaderCircle } from 'lucide-react';
 import type { Project, ProjectFilterId } from '../../types/portfolio';
 import { portfolio } from '../../data/portfolio';
-import { isExternalUrl } from '../common/Button';
+import { scrollToSection } from '../../utils/scroll';
+import { Button, isExternalUrl } from '../common/Button';
 import { EmptyState } from '../common/EmptyState';
 import { Reveal } from '../common/Reveal';
 import { Section } from '../common/Section';
@@ -41,30 +42,73 @@ export function Projects() {
     return result;
   }, [projects.items]);
 
-  const visible = useMemo(
+  const filtered = useMemo(
     () =>
       activeFilter === 'all' ? projects.items : projects.items.filter((project) => project.category === activeFilter),
     [activeFilter, projects.items],
   );
 
+  const [expanded, setExpanded] = useState(false);
+  const limit = projects.initialVisible && projects.initialVisible > 0 ? projects.initialVisible : filtered.length;
+  const hiddenCount = Math.max(filtered.length - limit, 0);
+  const visible = expanded ? filtered : filtered.slice(0, limit);
+
+  const changeFilter = (id: ProjectFilterId) => {
+    setActiveFilter(id);
+    setExpanded(false);
+  };
+
+  const collapse = () => {
+    setExpanded(false);
+    // Bring the grid back into view so the visitor isn't left far below it.
+    window.requestAnimationFrame(() => scrollToSection('projects'));
+  };
+
   return (
     <Section id="projects" header={projects}>
-      <ProjectFilter filters={projects.filters} active={activeFilter} counts={counts} onChange={setActiveFilter} />
+      <ProjectFilter filters={projects.filters} active={activeFilter} counts={counts} onChange={changeFilter} />
 
       <p className="sr-only" aria-live="polite">
-        Showing {visible.length} {visible.length === 1 ? 'project' : 'projects'}
+        Showing {visible.length} of {filtered.length} {filtered.length === 1 ? 'project' : 'projects'}
       </p>
 
-      {visible.length === 0 ? (
+      {filtered.length === 0 ? (
         <EmptyState title={projects.emptyState.title} description={projects.emptyState.description} />
       ) : (
-        <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <ul id="project-grid" className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           <AnimatePresence mode="popLayout" initial={false}>
             {visible.map((project) => (
               <ProjectCard key={project.slug} project={project} onViewDetails={setSelected} />
             ))}
           </AnimatePresence>
         </ul>
+      )}
+
+      {hiddenCount > 0 && (
+        <div className="mt-10 flex justify-center">
+          <Button
+            variant="secondary"
+            size="lg"
+            aria-expanded={expanded}
+            aria-controls="project-grid"
+            onClick={expanded ? collapse : () => setExpanded(true)}
+          >
+            {expanded ? (
+              <>
+                {projects.showLessLabel ?? 'Show less'}
+                <ChevronUp className="size-4" aria-hidden="true" />
+              </>
+            ) : (
+              <>
+                {projects.showMoreLabel ?? 'Show more'}
+                <span className="rounded-md bg-tint-strong px-1.5 py-px font-mono text-xs text-slate-300">
+                  +{hiddenCount}
+                </span>
+                <ChevronDown className="size-4 transition-transform group-hover:translate-y-0.5" aria-hidden="true" />
+              </>
+            )}
+          </Button>
+        </div>
       )}
 
       {projects.additional && projects.additional.length > 0 && (

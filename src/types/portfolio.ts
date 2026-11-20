@@ -229,6 +229,10 @@ export interface ProjectsContent extends SectionHeader {
   };
   categoryLabels: Record<ProjectCategory, string>;
   items: Project[];
+  /** How many projects to show before the "Show more" button. Omit or 0 to show all. */
+  initialVisible?: number;
+  showMoreLabel?: string;
+  showLessLabel?: string;
   /** Heading for the compact list of smaller projects. */
   additionalTitle?: string;
   /** Smaller projects shown as a compact list below the grid. Empty hides the list. */

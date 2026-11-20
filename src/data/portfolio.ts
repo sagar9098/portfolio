@@ -309,6 +309,10 @@ export const portfolio: PortfolioConfig = {
       web: 'Web',
       mobile: 'Mobile',
     },
+    // Show this many projects first; the rest appear after "Show more".
+    initialVisible: 6,
+    showMoreLabel: 'Show more projects',
+    showLessLabel: 'Show less',
     emptyState: {
       title: 'Projects coming soon',
       description: 'New projects in this category are being prepared and will be added here shortly.',
@@ -783,6 +787,16 @@ export const portfolio: PortfolioConfig = {
         ],
         technologies: ['Flutter', 'Dart', 'REST APIs', 'MethodChannel', 'Deep Links', 'Firebase'],
         role: 'Flutter Developer',
+        // Images rendered from the app design in Figma (branding updated to OTT Hum, dummy profile data).
+        image: { src: '/images/projects/ott-hum-cover.webp', alt: 'OTT Hum app — home, categories and episode screens', width: 1280, height: 800 },
+        gallery: ['Home', 'Episode details', 'Categories', 'Watchlist', "Who's watching profiles", 'Genre selection', 'Login', 'Account'].map(
+          (label, i) => ({
+            src: `/images/projects/ott-hum-screen-${i + 1}.webp`,
+            alt: `OTT Hum — ${label} screen`,
+            width: 554,
+            height: 1200,
+          }),
+        ),
       },
       {
         slug: 'tailoring-pos',
