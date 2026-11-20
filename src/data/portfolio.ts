@@ -750,6 +750,19 @@ export const portfolio: PortfolioConfig = {
         technologies: ['Flutter', 'Dart', 'BLoC', 'REST APIs', 'Real-time Sync'],
         role: 'Flutter Developer',
         organization: 'Cserve Technologies',
+        // Images: Xodox Suite web dashboard (the mobile app mirrors it) — personal details replaced with dummy data.
+        image: {
+          src: '/images/projects/xodox-suite-cover.webp',
+          alt: 'Xodox Suite dashboard — general board and business overview',
+          width: 1280,
+          height: 800,
+        },
+        gallery: [
+          shot('xodox-suite', 1, 427, 'Xodox Suite general board with sidebar navigation'),
+          shot('xodox-suite', 2, 381, 'Software map and command center'),
+          shot('xodox-suite', 3, 340, 'Health score and featured workspaces'),
+          shot('xodox-suite', 4, 534, 'Personal workspace with task table'),
+        ],
       },
       {
         slug: 'ott-hum',
