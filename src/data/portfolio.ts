@@ -805,16 +805,35 @@ export const portfolio: PortfolioConfig = {
         organization: 'Bellway Infotech',
       },
       {
+        // Customer app on Google Play: "madeByMaa :- Made By Maa food" (com.madebymaa.food).
+        // The resume lists the Seller App for Mom chefs — both are part of the same platform.
         slug: 'madebymaa-seller',
-        title: 'MadeByMaa — Seller App',
+        title: 'MadeByMaa — Homemade Food Delivery',
         category: 'mobile',
-        typeLabel: 'Mobile Application',
-        summary: 'Seller app for managing product listings, orders and inventory, with push notifications.',
+        typeLabel: 'Seller & Customer Apps · Google Play',
+        summary:
+          'Homemade-food delivery platform connecting customers with FSSAI-certified home chefs — seller app for listings, orders and inventory.',
         description:
-          'A seller app for managing product listings, orders and inventory, with a responsive UI for Android and iOS.',
-        features: ['Product listing management', 'Order management & tracking', 'Inventory management', 'Authentication', 'Push notifications'],
+          'MadeByMaa delivers homemade meals from verified "Mom chefs". Customers find nearby home chefs, browse cuisines and order with on-demand delivery and offers. I developed the Seller App that chefs use to manage product listings, orders and inventory, with authentication and push notifications for Android and iOS.',
+        features: [
+          'Seller app: product listing management',
+          'Seller app: order management & tracking',
+          'Seller app: inventory management',
+          'Customers discover nearby home chefs and cuisines',
+          'On-demand delivery with offers and discounts',
+          'Location detection and card / UPI / net-banking payments',
+          'Authentication and push notifications',
+        ],
         technologies: ['Flutter', 'Dart', 'REST APIs', 'Firebase'],
-        role: 'Flutter Developer',
+        role: 'Flutter Developer (Seller App)',
+        image: { src: '/images/projects/madebymaa-cover.webp', alt: 'MadeByMaa app screens', width: 1280, height: 800 },
+        gallery: [1, 2, 3, 4].map((n) => ({
+          src: `/images/projects/madebymaa-screen-${n}.webp`,
+          alt: `MadeByMaa app screenshot ${n}`,
+          width: 675,
+          height: 1200,
+        })),
+        playStoreUrl: 'https://play.google.com/store/apps/details?id=com.madebymaa.food',
       },
       {
         slug: 'xodoxhelp',
