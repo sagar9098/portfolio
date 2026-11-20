@@ -1,0 +1,149 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --color-ink-950: #070b14;
+  --color-ink-900: #0b1220;
+  --color-ink-800: #111a2e;
+  --color-ink-700: #1b2640;
+
+  /* Semantic hairlines and tints (remapped for light mode below). */
+  --color-line: rgb(255 255 255 / 0.08);
+  --color-line-soft: rgb(255 255 255 / 0.06);
+  --color-line-strong: rgb(255 255 255 / 0.2);
+  --color-tint: rgb(255 255 255 / 0.035);
+  --color-tint-strong: rgb(255 255 255 / 0.06);
+}
+
+/*
+ * ---------------------------------------------------------------------------
+ *  Theming
+ * ---------------------------------------------------------------------------
+ *  Dark is the base palette. Light mode is applied by setting
+ *  <html data-theme="light"> (done before first paint by the inline script
+ *  injected from vite-plugin-seo.ts, and by the ThemeToggle at runtime).
+ *
+ *  Tailwind v4 utilities read colours from CSS variables, so instead of
+ *  adding `light:` variants to every component we remap the palette here:
+ *  "white" becomes the darkest ink, the slate scale is inverted, the ink
+ *  scale becomes light surfaces and accent tints are deepened for contrast.
+ *  These rules are unlayered, so they override Tailwind's theme layer.
+ * ---------------------------------------------------------------------------
+ */
+:root {
+  color-scheme: dark;
+  --glass-bg: rgb(17 26 46 / 0.55);
+  --glass-border: rgb(255 255 255 / 0.07);
+  --glass-shadow: none;
+  --grid-line: rgb(148 163 184 / 0.06);
+  --gradient-text: linear-gradient(110deg, #6ee7b7 0%, #34d399 40%, #2dd4bf 100%);
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+
+  /* Surfaces — page is a soft grey-blue so white cards stand out. */
+  --color-ink-950: #eef2f7;
+  --color-ink-900: #ffffff;
+  --color-ink-800: #e6ecf3;
+  --color-ink-700: #d8e0ea;
+
+  /* Hairlines and tints — much stronger than in dark mode for visibility. */
+  --color-line: rgb(15 23 42 / 0.14);
+  --color-line-soft: rgb(15 23 42 / 0.1);
+  --color-line-strong: rgb(15 23 42 / 0.3);
+  --color-tint: rgb(15 23 42 / 0.045);
+  --color-tint-strong: rgb(15 23 42 / 0.08);
+
+  /* Foreground: "white" is used for headings, hairline borders and tints. */
+  --color-white: #0b1220;
+  --color-black: #64748b;
+  --color-slate-100: #0f172a;
+  --color-slate-200: #1e293b;
+  --color-slate-300: #334155;
+  --color-slate-400: #3f4b5e;
+  --color-slate-500: #556275;
+
+  /* Accents — deepened so text and buttons keep AA contrast on light surfaces. */
+  --color-emerald-100: #022c22;
+  --color-emerald-200: #064e3b;
+  --color-emerald-300: #065f46;
+  --color-emerald-400: #047857;
+  --color-teal-400: #0f766e;
+  --color-sky-200: #075985;
+  --color-rose-100: #881337;
+  --color-rose-300: #be123c;
+
+  --glass-bg: #ffffff;
+  --glass-border: rgb(15 23 42 / 0.12);
+  --glass-shadow: 0 1px 2px rgb(15 23 42 / 0.06), 0 12px 32px -16px rgb(15 23 42 / 0.22);
+  --grid-line: rgb(15 23 42 / 0.07);
+  --gradient-text: linear-gradient(110deg, #047857 0%, #059669 45%, #0f766e 100%);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-ink-950 font-sans text-slate-300 antialiased;
+    text-rendering: optimizeLegibility;
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
+  }
+
+  ::selection {
+    @apply bg-emerald-400/30 text-white;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-emerald-400;
+  }
+
+  section[id] {
+    scroll-margin-top: 5rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto !important;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* Frosted glass surface used by cards and panels. */
+@utility glass {
+  background-color: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+/* Emerald → teal gradient text. */
+@utility text-gradient {
+  background-image: var(--gradient-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Faint engineering grid used behind the hero. */
+@utility bg-grid {
+  background-image:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
