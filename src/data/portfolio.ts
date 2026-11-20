@@ -714,6 +714,21 @@ export const portfolio: PortfolioConfig = {
         technologies: ['Flutter', 'Dart', 'GetX', 'Firebase', 'QR / NFC', 'Google Maps', 'Stripe', 'REST APIs'],
         role: 'Flutter Developer',
         organization: 'Cserve Technologies',
+        // Images rendered from the UGO website design in Figma.
+        image: {
+          src: '/images/projects/ugo-fitness-cover.webp',
+          alt: 'UGO Fitness website design — hero, services and pricing',
+          width: 1280,
+          height: 800,
+        },
+        gallery: [
+          shot('ugo-fitness', 1, 801, 'UGO hero — Your Fitness Journey Starts Here'),
+          shot('ugo-fitness', 2, 905, 'UGO about section with stats and gym video'),
+          shot('ugo-fitness', 3, 743, 'UGO why choose us section'),
+          shot('ugo-fitness', 4, 839, 'UGO fitness services'),
+          shot('ugo-fitness', 5, 801, 'UGO membership pricing plans'),
+          shot('ugo-fitness', 6, 438, 'UGO mobile app download section'),
+        ],
       },
       {
         slug: 'xodox-crm-hrms',
