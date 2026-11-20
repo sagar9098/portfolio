@@ -794,15 +794,35 @@ export const portfolio: PortfolioConfig = {
         description:
           'A multi-role Point-of-Sale and management app for a custom tailoring and clothing business, supporting vendors, admins, employees and cutters with role-based access control.',
         features: [
-          'Role-based access: vendors, admins, employees, cutters',
-          'Billing and order creation',
-          'Order progress tracking',
-          'Raw-material distribution',
-          'Task status workflows',
+          'Role-based logins: Admin, Staff and Vendor',
+          'Create bills with product, quantity and pricing — hold, reset or pay',
+          'My Bills and Hold Bills with invoice history',
+          'Customers: list, sales, sales returns and new customers',
+          'Purchases: suppliers, purchase list, returns and new purchases',
+          'Product catalogue with categories, brands, units and base price',
+          'Order progress tracking, raw-material distribution and task workflows',
+          'Notifications',
         ],
         technologies: ['Flutter', 'Dart', 'Provider', 'GetX', 'REST APIs', 'Role-Based Access Control'],
         role: 'Flutter Developer',
         organization: 'Bellway Infotech',
+        // Images rendered from the POS app design in Figma.
+        image: { src: '/images/projects/pos-cover.webp', alt: 'POS app — login, dashboard and billing screens', width: 1280, height: 800 },
+        gallery: [
+          ['Dashboard', 555],
+          ['Admin login', 555],
+          ['Create bill', 555],
+          ['My bills', 555],
+          ['Hold bills', 555],
+          ['Add product', 555],
+          ['Customer', 554],
+          ['Purchase', 554],
+        ].map(([label, width], i) => ({
+          src: `/images/projects/pos-screen-${i + 1}.webp`,
+          alt: `POS app — ${label} screen`,
+          width: width as number,
+          height: 1200,
+        })),
       },
       {
         // Customer app on Google Play: "madeByMaa :- Made By Maa food" (com.madebymaa.food).
