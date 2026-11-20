@@ -209,6 +209,9 @@ export interface Project {
   /** Only real, public URLs. Leave undefined to hide the button. */
   githubUrl?: string;
   liveUrl?: string;
+  /** Google Play / App Store listing URLs. */
+  playStoreUrl?: string;
+  appStoreUrl?: string;
   /** Optional clarifying note, e.g. "Source code is private". */
   note?: string;
 }

@@ -622,50 +622,76 @@ export const portfolio: PortfolioConfig = {
       // Projects from the resumes (Flutter + Java/Spring Boot versions)
       // ---------------------------------------------------------------------
       {
+        // Published on Google Play as "sampatti services" (com.services.sampatti).
         slug: 'sampatti',
         title: 'Sampatti — Real Estate Marketplace',
         category: 'mobile',
-        typeLabel: 'Freelance · Cross-Platform App (Android, iOS & Web)',
+        typeLabel: 'Freelance · Published on Google Play',
         summary:
-          'Real estate marketplace to browse, buy and sell properties, with advanced search, Google Maps and wishlists.',
+          'Real estate app to buy, sell and rent homes, flats, plots, shops and offices — verified listings, smart filters and direct contact.',
         description:
-          'A real estate marketplace enabling users to browse, buy and sell properties, delivered with a responsive UI across Android, iOS and Web.',
+          'A one-stop real estate app connecting property buyers, sellers, renters and agents. Users browse verified residential and commercial listings, post their own properties with photos and details, and contact owners or agents directly.',
         features: [
-          'Property listings & detailed property pages',
-          'Advanced search and filtering',
-          'Google Maps integration',
-          'Authentication',
-          'Wishlist',
-          'Inquiry / contact module',
+          'Buy & sell properties — post listings or browse verified ones',
+          'Rent houses, apartments, shops and offices',
+          'Smart search & filters by location, price and property type',
+          'Post property with photos and detailed descriptions',
+          'Detailed property pages with Google Maps',
+          'Shortlist / wishlist of saved properties',
+          'Direct contact with buyers, sellers and agents',
+          'Secure authentication and data protection',
         ],
         // NOTE: the original brief described Sampatti as React + Java / Spring Boot;
         // both resumes list Flutter. Edit if the web version used a different stack.
         technologies: ['Flutter', 'Dart', 'REST APIs', 'Google Maps', 'Firebase'],
         role: 'Freelance Flutter Developer',
         organization: 'Freelance',
+        image: { src: '/images/projects/sampatti-cover.webp', alt: 'Sampatti real estate app screens', width: 1280, height: 800 },
+        gallery: [1, 2, 3, 4].map((n) => ({
+          src: `/images/projects/sampatti-screen-${n}.webp`,
+          alt: `Sampatti app screenshot ${n}`,
+          width: 675,
+          height: 1200,
+        })),
+        playStoreUrl: 'https://play.google.com/store/apps/details?id=com.services.sampatti',
         githubUrl: 'https://github.com/Sagar9098/sampatti_',
       },
       {
+        // Published on Google Play as "Sampatti Home Services" (com.sampatti.demand.services).
         slug: 'sampatti-home-services',
         title: 'Sampatti Home Services',
         category: 'mobile',
-        typeLabel: 'Freelance · Cross-Platform App',
-        // DUMMY — summary, description, features and stack are placeholders. Replace with real details.
+        typeLabel: 'Freelance · Published on Google Play',
         summary:
-          'Home services app for booking verified professionals — cleaning, repairs, plumbing, electrical and more.',
+          'On-demand home services app — book electricians, AC technicians, plumbers and cleaners, with live status and expert tracking.',
         description:
-          'A home services platform where customers browse service categories, book verified professionals for a time slot and track their bookings, with an admin side for managing services and providers.',
+          'A home service booking platform for repair, maintenance and cleaning. Users pick a service, describe the problem, share their location and book nearby experts, then follow the job in real time — accepted, on the way, started, completed. A dedicated expert workflow lets professionals manage availability, accept jobs and update progress.',
         features: [
-          'Service categories & listings',
-          'Slot-based booking',
-          'Booking tracking & history',
-          'Authentication & user profiles',
-          'Push notifications',
-          'Provider / admin management',
+          'Guided booking — service, problem details, location & photos',
+          'Real-time booking status (accepted, arrived, started, completed)',
+          'Live expert tracking during active jobs',
+          'Booking history — completed, cancelled and past bookings',
+          'Push notifications for booking progress and alerts',
+          'Expert app flow — apply, go online/offline, accept or reject jobs',
+          'Profile management and in-app support',
         ],
-        technologies: ['Flutter', 'Dart', 'REST APIs', 'Firebase', 'Google Maps'],
+        // NOTE: stack inferred from the app's features (maps, live tracking, notifications) — verify.
+        technologies: ['Flutter', 'Dart', 'REST APIs', 'Google Maps', 'Firebase', 'Real-time updates'],
         role: 'Freelance Flutter Developer',
         organization: 'Freelance',
+        image: {
+          src: '/images/projects/sampatti-home-services-cover.webp',
+          alt: 'Sampatti Home Services app screens',
+          width: 1280,
+          height: 800,
+        },
+        gallery: [1, 2, 3].map((n) => ({
+          src: `/images/projects/sampatti-home-services-screen-${n}.webp`,
+          alt: `Sampatti Home Services screenshot ${n}`,
+          width: 538,
+          height: 1200,
+        })),
+        playStoreUrl: 'https://play.google.com/store/apps/details?id=com.sampatti.demand.services',
       },
       {
         slug: 'ugo-fitness',

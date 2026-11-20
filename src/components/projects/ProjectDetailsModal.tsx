@@ -1,9 +1,10 @@
 import { useRef, type ReactNode } from 'react';
 import { m } from 'framer-motion';
 import { Check, Quote, X } from 'lucide-react';
-import type { Project } from '../../types/portfolio';
+import type { Project, ProjectImage } from '../../types/portfolio';
 import { portfolio } from '../../data/portfolio';
 import { useDialog } from '../../hooks/useDialog';
+import { cn } from '../../utils/cn';
 import { TechBadge } from '../common/TechBadge';
 import { ProjectLinks } from './ProjectLinks';
 import { ProjectThumbnail } from './ProjectThumbnail';
@@ -11,6 +12,36 @@ import { ProjectThumbnail } from './ProjectThumbnail';
 interface ProjectDetailsModalProps {
   project: Project;
   onClose: () => void;
+}
+
+/** Phone-sized screenshots (narrow and tall) are shown in their own grid at phone proportions. */
+function isPhoneShot(image: ProjectImage): boolean {
+  return image.width <= 800 && image.height > image.width;
+}
+
+function GalleryImage({ image, className }: { image: ProjectImage; className: string }) {
+  return (
+    <a
+      href={image.src}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`${image.alt} (open full size in a new tab)`}
+      className={cn(
+        'group block overflow-hidden rounded-xl border border-line bg-ink-800 transition-colors hover:border-emerald-400/40',
+        className,
+      )}
+    >
+      <img
+        src={image.src}
+        alt={image.alt}
+        width={image.width}
+        height={image.height}
+        loading="lazy"
+        decoding="async"
+        className="size-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+      />
+    </a>
+  );
 }
 
 function Heading({ children }: { children: ReactNode }) {
@@ -22,6 +53,9 @@ export default function ProjectDetailsModal({ project, onClose }: ProjectDetails
   const panelRef = useRef<HTMLDivElement>(null);
   useDialog(panelRef, true, onClose);
   const titleId = `project-${project.slug}-title`;
+  const gallery = project.gallery ?? [];
+  const wideShots = gallery.filter((image) => !isPhoneShot(image));
+  const phoneShots = gallery.filter(isPhoneShot);
 
   const meta = [
     { label: 'Role', value: project.role },
@@ -125,32 +159,27 @@ export default function ProjectDetailsModal({ project, onClose }: ProjectDetails
               ))}
             </ul>
 
-            {project.gallery && project.gallery.length > 0 && (
+            {(wideShots.length > 0 || phoneShots.length > 0) && (
               <>
                 <Heading>Screenshots</Heading>
-                <ul className="grid grid-cols-2 gap-3">
-                  {project.gallery.map((image) => (
-                    <li key={image.src}>
-                      <a
-                        href={image.src}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={`${image.alt} (open full size in a new tab)`}
-                        className="group block aspect-[16/10] overflow-hidden rounded-xl border border-line bg-ink-800 transition-colors hover:border-emerald-400/40"
-                      >
-                        <img
-                          src={image.src}
-                          alt={image.alt}
-                          width={image.width}
-                          height={image.height}
-                          loading="lazy"
-                          decoding="async"
-                          className="size-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                        />
-                      </a>
-                    </li>
-                  ))}
-                </ul>
+                {wideShots.length > 0 && (
+                  <ul className="grid grid-cols-2 gap-3">
+                    {wideShots.map((image) => (
+                      <li key={image.src}>
+                        <GalleryImage image={image} className="aspect-[16/10]" />
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                {phoneShots.length > 0 && (
+                  <ul className={cn('grid grid-cols-3 gap-3 sm:grid-cols-4', wideShots.length > 0 && 'mt-3')}>
+                    {phoneShots.map((image) => (
+                      <li key={image.src}>
+                        <GalleryImage image={image} className="aspect-[9/17]" />
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </>
             )}
 
